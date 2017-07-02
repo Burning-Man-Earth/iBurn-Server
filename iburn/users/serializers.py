@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from django_comments.models import Comment
 
 from .models import User
 
@@ -25,7 +24,3 @@ class CreateUserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'password', 'auth_token')
         read_only_fields = ('auth_token',)
         extra_kwargs = {'password': {'write_only': True}}
-
-class CommentSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Comment

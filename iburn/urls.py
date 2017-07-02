@@ -12,14 +12,12 @@ from users.views import UserViewSet
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
-router.register(r'comments', CommentViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^django-rq/', include('django_rq.urls')),
     url(r'^api/v1/', include('authentication.urls')),
     url(r'^api/v1/', include(router.urls)),
-    url(r'^comments/', include('django_comments.urls')),
 
     # the 'api-root' from django rest-frameworks default router
     # http://www.django-rest-framework.org/api-guide/routers/#defaultrouter
