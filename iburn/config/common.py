@@ -15,6 +15,8 @@ class Common(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        'django.contrib.sites',
+        'django_comments',
 
 
         # Third party apps
@@ -44,6 +46,8 @@ class Common(Configuration):
 
     SECRET_KEY = 'Not a secret'
     WSGI_APPLICATION = 'wsgi.application'
+
+    SITE_ID=1
 
     # Email
     EMAIL_BACKEND = values.Value('django.core.mail.backends.smtp.EmailBackend')

@@ -41,8 +41,16 @@ class MyUserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True)
+    username = models.CharField(max_length=255)
     display_name = models.CharField(max_length=255)
-
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    
+    is_active = models.BooleanField(
+        _('active status'),
+        default=False,
+        help_text=_('Designates whether the user exists in the site.'),
+    )
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
