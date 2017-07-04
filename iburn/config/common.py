@@ -15,6 +15,7 @@ class Common(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        'django.contrib.sites',
 
 
         # Third party apps
@@ -22,10 +23,12 @@ class Common(Configuration):
         'rest_framework.authtoken',  # token authentication
         'django_rq',                 # asynchronous queuing
         'versatileimagefield',       # image manipulation
-
+        'django_comments_xtd',       # commenting add-on
+        'django_comments',           # base commenting module
         # Your apps
         'authentication',
-        'users'
+        'users',
+        'blog',
 
     )
 
@@ -35,6 +38,8 @@ class Common(Configuration):
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
         'django.middleware.security.SecurityMiddleware'
@@ -66,10 +71,19 @@ class Common(Configuration):
     USE_TZ = True
     LOGIN_REDIRECT_URL = '/'
 
-    # Static Files
-    STATIC_ROOT = join(os.path.dirname(BASE_DIR), 'staticfiles')
-    STATICFILES_DIRS = [join(os.path.dirname(BASE_DIR), 'static'), ]
+   # https://docs.djangoproject.com/en/1.9/howto/static-files/
     STATIC_URL = '/static/'
+
+    # Additional locations of static files
+    STATICFILES_DIRS = (
+        # Put strings here, like "/home/html/static" or "C:/www/django/static".
+        # Always use forward slashes, even on Windows.
+        # Don't forget to use absolute paths, not relative paths.
+        os.path.join(BASE_DIR, 'static'),
+    )
+
+    # List of finder classes that know how to find static files in
+    # various locations.
     STATICFILES_FINDERS = (
         'django.contrib.staticfiles.finders.FileSystemFinder',
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -82,7 +96,7 @@ class Common(Configuration):
     TEMPLATES = [
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
-            'DIRS': STATICFILES_DIRS,
+            'DIRS': [os.path.join(BASE_DIR, 'templates')],
             'OPTIONS': {
                 'context_processors': [
                     'django.contrib.auth.context_processors.auth',
@@ -232,3 +246,8 @@ class Common(Configuration):
     # admin template so it may interfere with other apps that modify the
     # default admin template. If you're using such an app, simply remove this.
     RQ_SHOW_ADMIN_LINK = True
+
+    # django-cmments-xtd
+    COMMENTS_APP = 'django_comments_xtd'
+    COMMENTS_XTD_CONFIRM_EMAIL = False
+    SITE_ID = 1
