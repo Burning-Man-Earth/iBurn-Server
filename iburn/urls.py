@@ -9,6 +9,7 @@ from django.views.generic.base import RedirectView
 from rest_framework.routers import DefaultRouter
 from django.views.generic import ListView, DateDetailView
 from django.views.generic import TemplateView
+from rest_framework.authtoken import views
 
 from users.views import UserViewSet
 from blog.models import Post
@@ -25,6 +26,7 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name="home.html"),
         name='homepage'),
     url(r'^comments/', include('django_comments_xtd.urls')),
+    url(r'^api-token-auth/', views.obtain_auth_token)
 
     # the 'api-root' from django rest-frameworks default router
     # http://www.django-rest-framework.org/api-guide/routers/#defaultrouter
