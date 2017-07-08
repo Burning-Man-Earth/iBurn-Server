@@ -1,7 +1,7 @@
 *.pyc
 *.db
 *~
-
+examples/bm_api.yaml
 html/
 htmlcov/
 coverage/
