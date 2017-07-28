@@ -33,7 +33,7 @@ def init():
     """
     print cyan('Initializing...', bold=True)
     set_remotes()
-    ask_for_aws_keys()
+    #ask_for_aws_keys()
     for environment in env.environments:
         env.environment = environment
         env.server_name = '{}-{}'.format(env.project_name, env.environment)
@@ -94,13 +94,13 @@ def configure_sever():
     require('environment')
     local('heroku addons:create heroku-postgresql --remote {}'.format(env.environment))
     local('heroku pg:backups schedule DATABASE --at "04:00 UTC" --remote {}'.format(env.environment))
-    local('heroku pg:promote DATABASE_URL --remote {}'.format(env.environment))
+    #local('heroku pg:promote DATABASE_URL --remote {}'.format(env.environment))
     local('heroku addons:create redistogo:nano --remote {}'.format(env.environment))
     local('heroku addons:create newrelic:wayne --remote {}'.format(env.environment))
     local('heroku config:set NEW_RELIC_APP_NAME="{}" --remote {}'.format(env.project_name, env.environment))
     local('heroku config:set DJANGO_CONFIGURATION=Production --remote {}'.format(env.environment))
     local('heroku config:set DJANGO_SECRET_KEY="{}" --remote {}'.format(create_secret_key(), env.environment))
-    set_aws_keys()
+    #set_aws_keys()
 
 
 def deploy_docs():
