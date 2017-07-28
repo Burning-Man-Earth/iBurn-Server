@@ -130,6 +130,7 @@ class Common(Configuration):
     # Set DEBUG to False as a default for safety
     # https://docs.djangoproject.com/en/dev/ref/settings/#debug
     DEBUG = values.BooleanValue(False)
+    DEBUG_PROPAGATE_EXCEPTIONS = True
     for config in TEMPLATES:
         config['OPTIONS']['debug'] = DEBUG
 
